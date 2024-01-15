@@ -201,7 +201,8 @@ public class RegisterWindow extends JFrame {
 	public void Connect() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/minimarketposdb", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/minimarketposdb", "root", "erl07pogi");
+			System.out.print("connected");
 		}
 		
 		catch (ClassNotFoundException ex) {

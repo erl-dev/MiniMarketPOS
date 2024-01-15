@@ -177,7 +177,7 @@ public class LoginWindow extends JFrame {
 	public void Connect() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/minimarketposdb", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/minimarketposdb", "root", "erl07pogi");
 		}
 		
 		catch (ClassNotFoundException ex) {

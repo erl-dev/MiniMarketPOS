@@ -38,6 +38,7 @@ public class BillingWindow {
 	private JTextField txtPrice;
 	private JTextField txtTotal;
 	private JTable tableBilling;
+	boolean isItemFound = false;
 
 	/**
 	 * Launch the application.
@@ -73,7 +74,7 @@ public class BillingWindow {
 	public void Connect() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/minimarketposdb", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/minimarketposdb", "root", "erl07pogi");
 		}
 		
 		catch (ClassNotFoundException ex) {
@@ -150,22 +151,22 @@ public class BillingWindow {
 					
 					try {
 						Class.forName("com.mysql.cj.jdbc.Driver");
-						con = DriverManager.getConnection("jdbc:mysql://localhost/minimarketposdb", "root", "");
+						con = DriverManager.getConnection("jdbc:mysql://localhost/minimarketposdb", "root", "erl07pogi");
 						pst = con.prepareStatement("select * from items where sku = ?");
 		                pst.setString(1, sku);
 		                
 		                rs = pst.executeQuery();
 		                
 		                if(rs.next() == false)
-		                {    
+{    
 		                    JOptionPane.showMessageDialog(null, "SKU Code Not Found");  
 		                }
-		                else
-		                {
+		                else{
 		                     String itemName = rs.getString("itemname");
 		                     String price = rs.getString("price");
 		                     txtItemName.setText(itemName.trim());
 		                     txtPrice.setText(price.trim());
+		                    
 		                }
 						
 					} catch (ClassNotFoundException e1) {
@@ -206,6 +207,7 @@ public class BillingWindow {
 			public void stateChanged(ChangeEvent e) {
 				
 				int qty = Integer.parseInt(spinnerQty.getValue().toString());
+				
 				int price = Integer.parseInt(txtPrice.getText());
 				
 				int total = qty * price;
