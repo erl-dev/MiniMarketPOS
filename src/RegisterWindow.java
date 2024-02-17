@@ -196,13 +196,13 @@ public class RegisterWindow extends JFrame {
 		btnCancel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnCancel.setBounds(353, 373, 188, 59);
 		contentPane.add(btnCancel);
+		setLocationRelativeTo(null);
 	}
 	
 	public void Connect() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost/minimarketposdb", "root", "erl07pogi");
-			System.out.print("connected");
 		}
 		
 		catch (ClassNotFoundException ex) {

@@ -39,6 +39,7 @@ public class BillingWindow {
 	private JTextField txtTotal;
 	private JTable tableBilling;
 	boolean isItemFound = false;
+    boolean isPrinted = false;
 
 	/**
 	 * Launch the application.
@@ -371,41 +372,47 @@ public class BillingWindow {
 		btnPrint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String total = txtTotalAmt.getText();
-				String cash = txtCash.getText();
-				String bal = txtBal.getText();
-				
-				DefaultTableModel model = new DefaultTableModel();
-				model = (DefaultTableModel)tableBilling.getModel();
-				
+				if(!isPrinted) {
+					String total = txtTotalAmt.getText();
+					String cash = txtCash.getText();
+					String bal = txtBal.getText();
+					
+					DefaultTableModel model = new DefaultTableModel();
+					model = (DefaultTableModel)tableBilling.getModel();
+					
 
-				txtReceipt.setText(txtReceipt.getText() + "*************************************************************************************\n");
-				txtReceipt.setText(txtReceipt.getText() + "                                     MINIMARKET                                     \n");
-				txtReceipt.setText(txtReceipt.getText() + "*************************************************************************************\n");
-      
-				//Heading
-				txtReceipt.setText(txtReceipt.getText() + "SKU" + "\t\t" + "Item Name" + "\t\t" + "Amount" + "\n"  );
-				 
-				 
-				 for(int i = 0; i < model.getRowCount(); i++)
-				 {
-				     
-				     String sku = (String)model.getValueAt(i, 0);
-				     String itemName = (String)model.getValueAt(i, 1);
-				     String amount = (String)model.getValueAt(i, 4);
-				     
-				     txtReceipt.setText(txtReceipt.getText() + sku  + "\t" + itemName + "\t" + amount  + "\n"  );
-   
-				 }
-				 
-				 txtReceipt.setText(txtReceipt.getText() + "\n\n\n\n\n\n\n\n\n\n");    
-				 
-				 txtReceipt.setText(txtReceipt.getText() + "\t" + "\t" + "\t" + "\t" + "Subtotal :" + total + "\n");
-				 txtReceipt.setText(txtReceipt.getText() + "\t" + "\t" + "\t" + "\t" + "Pay :" + cash + "\n");
-				 txtReceipt.setText(txtReceipt.getText() + "\t" + "\t" + "\t" + "\t" + "Balance :" + bal + "\n");
-				 txtReceipt.setText(txtReceipt.getText() + "\n");
-				 txtReceipt.setText(txtReceipt.getText() + "***********************************************************************************\n");
-				 txtReceipt.setText(txtReceipt.getText() + "                            THANK YOU COME AGAIN             \n");
+					txtReceipt.setText(txtReceipt.getText() + "*************************************************************************************\n");
+					txtReceipt.setText(txtReceipt.getText() + "                                     MINIMARKET                                     \n");
+					txtReceipt.setText(txtReceipt.getText() + "*************************************************************************************\n");
+	      
+					//Heading
+					txtReceipt.setText(txtReceipt.getText() + "SKU" + "\t\t" + "Item Name" + "\t\t" + "Amount" + "\n"  );
+					 
+					 
+					 for(int i = 0; i < model.getRowCount(); i++)
+					 {
+					     
+					     String sku = (String)model.getValueAt(i, 0);
+					     String itemName = (String)model.getValueAt(i, 1);
+					     String amount = (String)model.getValueAt(i, 4);
+					     
+					     txtReceipt.setText(txtReceipt.getText() + sku  + "\t" + "\t" + itemName + "\t" + amount  + "\n"  );
+	   
+					 }
+					 
+					 txtReceipt.setText(txtReceipt.getText() + "\n\n\n\n\n\n\n\n\n\n");    
+					 
+					 txtReceipt.setText(txtReceipt.getText() + "\t" + "\t" + "\t" + "     Subtotal :" + total + "\n");
+					 txtReceipt.setText(txtReceipt.getText() + "\t" + "\t" + "\t" + "     Pay :" + cash + "\n");
+					 txtReceipt.setText(txtReceipt.getText() + "\t" + "\t" + "\t" + "     Balance :" + bal + "\n");
+					 txtReceipt.setText(txtReceipt.getText() + "\n");
+					 txtReceipt.setText(txtReceipt.getText() + "***********************************************************************************\n");
+					 txtReceipt.setText(txtReceipt.getText() + "                             THANK YOU COME AGAIN!!!             \n");
+					 
+					 isPrinted = true;
+				}
+				
+				
 			}
 		});
 		btnPrint.setFont(new Font("Tahoma", Font.BOLD, 20));
