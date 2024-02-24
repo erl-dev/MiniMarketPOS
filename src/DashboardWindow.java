@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
@@ -27,6 +29,7 @@ public class DashboardWindow extends JFrame {
 	
 	private PanelHome panelHomePage;
 	private PanelSales panelSalesPage;
+	private PanelReceiving panelReceivingPage;
 	
 	/**
 	 * Launch the application.
@@ -60,6 +63,7 @@ public class DashboardWindow extends JFrame {
 		
 		panelHomePage = new PanelHome();
 		panelSalesPage = new PanelSales();
+		panelReceivingPage = new PanelReceiving();
 		
 		
 		JPanel panelMenu = new JPanel();
@@ -123,7 +127,12 @@ public class DashboardWindow extends JFrame {
 		panelSales.add(lblSalesIcon);
 		
 		JPanel panelReceiving = new JPanel();
-		panelReceiving.addMouseListener(new PanelButtonMouseAdapter(panelReceiving));
+		panelReceiving.addMouseListener(new PanelButtonMouseAdapter(panelReceiving) {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menuClicked(panelReceivingPage);
+			}
+		});
 		panelReceiving.setBackground(new Color(0, 139, 139));
 		panelReceiving.setBounds(0, 261, 384, 62);
 		panelMenu.add(panelReceiving);
@@ -207,16 +216,20 @@ public class DashboardWindow extends JFrame {
 		panelMain.setBounds(394, 30, 600, 493);
 		contentPane.add(panelMain);
 		
-		panelMain.add(panelHomePage);
-		panelMain.add(panelSalesPage);
-		
-		
+		panelMain.setLayout(new CardLayout());
+	    panelMain.add(panelHomePage, "Home");
+	    panelMain.add(panelSalesPage, "Sales");
+		panelMain.add(panelReceivingPage, "Receiving");
+	    panelHomePage.setVisible(true);
+
+
 		menuClicked(panelHomePage);
 	}
 	
 	public void menuClicked(JPanel panel){
 		panelHomePage.setVisible(false);
 		panelSalesPage.setVisible(false);
+		panelReceivingPage.setVisible(false);
 		
 		panel.setVisible(true);
 	}

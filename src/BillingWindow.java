@@ -30,7 +30,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public class BillingWindow {
+public class BillingWindow extends JFrame{
 
 	JFrame frame;
 	private JTextField txtSku;
@@ -50,6 +50,7 @@ public class BillingWindow {
 				try {
 					BillingWindow window = new BillingWindow();
 					window.frame.setVisible(true);
+					window.frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -351,27 +352,23 @@ public class BillingWindow {
 		txtBal.setBounds(428, 516, 152, 33);
 		frame.getContentPane().add(txtBal);
 		
-		JButton btnPay = new JButton("PAY");
-		btnPay.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				Balance();
-			}
-		});
-		btnPay.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnPay.setBounds(633, 541, 143, 33);
-		frame.getContentPane().add(btnPay);
-		
-		
 		
 		JTextArea txtReceipt = new JTextArea();
 		txtReceipt.setBounds(786, 11, 398, 538);
 		frame.getContentPane().add(txtReceipt);
 		
 		JButton btnPrint = new JButton("PRINT");
-		btnPrint.addActionListener(new ActionListener() {
+		btnPrint.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnPrint.setBounds(902, 560, 143, 33);
+		frame.getContentPane().add(btnPrint);
+		
+		JButton btnPay = new JButton("PAY");
+		btnPay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				Balance();
+				
+				//Printed the preview of Receipt
 				if(!isPrinted) {
 					String total = txtTotalAmt.getText();
 					String cash = txtCash.getText();
@@ -412,12 +409,16 @@ public class BillingWindow {
 					 isPrinted = true;
 				}
 				
-				
 			}
 		});
-		btnPrint.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnPrint.setBounds(902, 560, 143, 33);
-		frame.getContentPane().add(btnPrint);
+		btnPay.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnPay.setBounds(633, 541, 143, 33);
+		frame.getContentPane().add(btnPay);
+		
+		
+		
+		
+		
 			
 	}
 	

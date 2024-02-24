@@ -153,29 +153,37 @@ public class RegisterWindow extends JFrame {
 					JOptionPane.showMessageDialog(null, "Input first the details above!");
 					
 				} else {
-					try {
-						pst = con.prepareStatement("insert into users(username,password,role,firstname,lastname)values(?,?,?,?,?)");
-						pst.setString(1, user);
-						pst.setString(2, password);
-						pst.setString(3, role);
-						pst.setString(4, fName);
-						pst.setString(5, lName);
-						
-						pst.executeUpdate();
-						JOptionPane.showMessageDialog(null, "Registered Successfully!");
-						
-						txtFirstName.setText("");
-						txtLastName.setText("");
-						txtUsername.setText("");
-						txtPass.setText("");
-						
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
-					
-				}
+			        try {
+			            // Check if the username already exists in the database
+			            pst = con.prepareStatement("SELECT * FROM users WHERE username = ?");
+			            pst.setString(1, user);
+			            ResultSet resultSet = pst.executeQuery();
+
+			            if (resultSet.next()) {
+			                // Username already exists
+			                JOptionPane.showMessageDialog(null, "Username already exists!");
+			            } else {
+			                // Username doesn't exist, proceed with registration
+			                pst = con.prepareStatement("INSERT INTO users(username, password, role, firstname, lastname) VALUES (?, ?, ?, ?, ?)");
+			                pst.setString(1, user);
+			                pst.setString(2, password);
+			                pst.setString(3, role);
+			                pst.setString(4, fName);
+			                pst.setString(5, lName);
+
+			                pst.executeUpdate();
+			                JOptionPane.showMessageDialog(null, "Registered Successfully!");
+
+			                // Clear input fields after registration
+			                txtFirstName.setText("");
+			                txtLastName.setText("");
+			                txtUsername.setText("");
+			                txtPass.setText("");
+			            }
+			        } catch (SQLException e1) {
+			            e1.printStackTrace();
+			        }
+			    }
 			}
 				
 				
@@ -187,7 +195,7 @@ public class RegisterWindow extends JFrame {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LoginWindow logInWindow = new LoginWindow();
+				NewLogin logInWindow = new NewLogin();
 				logInWindow.setVisible(true);
 				dispose();
 				

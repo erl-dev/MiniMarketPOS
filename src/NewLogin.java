@@ -153,8 +153,9 @@ public class NewLogin extends JFrame {
 				          
 				          if(role.equals("Cashier")) {
 				        	  JOptionPane.showMessageDialog(null,"Login Successfull!");
-				        	  DashboardWindow dashboardWindow = new DashboardWindow();
-				        	  dashboardWindow.setVisible(true);
+				        	  BillingWindow billingWindow = new BillingWindow();
+				        	  billingWindow.frame.setVisible(true);
+				        	  billingWindow.frame.setLocationRelativeTo(null);
 				        	  dispose();
 				          } else if (role.equals("Admin")) {
 				        	  JOptionPane.showMessageDialog(null,"Login Successfull!");
