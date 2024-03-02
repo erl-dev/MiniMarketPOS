@@ -159,8 +159,7 @@ public class BillingWindow extends JFrame{
 		                
 		                rs = pst.executeQuery();
 		                
-		                if(rs.next() == false)
-{    
+		                if(rs.next() == false){    
 		                    JOptionPane.showMessageDialog(null, "SKU Code Not Found");  
 		                }
 		                else{

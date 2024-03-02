@@ -59,6 +59,23 @@ public class PanelReceiving extends JPanel {
 		panel.add(btnAddItem);
 		
 		JButton btnAddInventory = new JButton("Add Inventory");
+		btnAddInventory.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				 
+                PanelAddInventory panelAddInventory = new PanelAddInventory();
+                
+                // Clear the current panel
+                removeAll();
+                
+                // Add the new panel to the receiving panel
+                add(panelAddInventory);
+                
+                // Repaint the receiving panel to reflect the changes
+                revalidate();
+                repaint();
+			}
+		});
 		btnAddInventory.setBounds(103, 148, 273, 64);
 		panel.add(btnAddInventory);
 	}
