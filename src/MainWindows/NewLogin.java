@@ -201,7 +201,7 @@ public class NewLogin extends JFrame {
 		JButton btnRegister = new JButton("REGISTER");
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegisterWindow registerWindow = new RegisterWindow();
+				NewRegister registerWindow = new NewRegister();
 	            registerWindow.setVisible(true);
 	            dispose();
 			}
